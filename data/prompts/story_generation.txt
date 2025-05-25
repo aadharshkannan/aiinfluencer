@@ -1,0 +1,29 @@
+
+### 🔧 **Prompt: "Pixar-ify This Proverb"**
+
+> **Take the following proverb**: *"{proverb}"*
+>
+> Write a **compelling short story** (300–600 words) that follows the **Pixar storytelling formula**, where:
+>
+> 1. The protagonist has a **clear external want** (e.g., to win, to belong, to be the best).
+> 2. They also have a **hidden internal need** (e.g., to learn humility, face grief, accept change).
+> 3. The story begins with their **normal world**, gets disrupted by a **"One day..." inciting event**, and unfolds through a chain of **"Because of that..."** consequences.
+> 4. The climax leads to an **emotional transformation** where the character learns or grows—aligning their want with their deeper need.
+> 5. The core **moral of the story embodies the proverb**, but not in a literal or preachy way—let the actions and change reveal it.
+
+End the story with a final line that echoes the change in the protagonist and nods to the deeper truth of the proverb.
+
+### 🧠 Example Input:
+
+> Proverb: “A stitch in time saves nine.”
+
+### ✨ Resulting Story (Shortened for brevity):
+
+> **Once upon a time**, in the bustling village of Tatterton, there was a young mouse named Nia who patched cloaks in her grandma’s tailor shop.
+> **Every day**, Nia stitched lazy little loops, ignoring frayed hems and skipping the boring bits. “Why fix one thread when the cloak still holds?” she’d shrug.
+> **One day**, a royal messenger burst in with a cape torn at the shoulder and demanded it be fixed by sunset—for the Queen’s midnight journey through the frostlands.
+> **Because of that**, Nia rushed the job, patching only the visible tear, ignoring the tiny unraveling seam just under the clasp.
+> **Because of that**, the Queen’s cloak tore wide open during her ride. Snow soaked her gown. She caught a chill. The palace blamed the tailor shop. Grandma’s business was nearly shut down.
+> **Until finally**, Nia stayed up for three nights, repairing every thread in every cloak in the shop. She learned to see where things might go wrong *before* they did. Her final masterpiece? A royal cloak reinforced with double stitching, hidden silken linings, and a tiny embroidered note:
+> *"Woven with care before it tore."*
+> **Ever since that day**, Nia became the kingdom’s most trusted tailor—not because her stitches were fast, but because they lasted.

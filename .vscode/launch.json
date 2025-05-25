@@ -1,0 +1,64 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "🧠 Debug with Moral",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/main.py",
+      "console": "integratedTerminal",
+      "args": [
+        "A stitch in time saves nine"
+      ]
+    },
+    {
+      "name": "🐍 Debug All Tests",
+      "type": "python",
+      "request": "launch",
+      // use your selected Python interpreter
+      "console": "integratedTerminal",
+      "justMyCode": false,
+      "module": "pytest",
+      "args": [
+        "--maxfail=1",  
+        "--disable-warnings",
+        "${workspaceFolder}/tests"
+      ]
+    },
+    {
+      "name": "🐍 Debug Current Test File",
+      "type": "python",
+      "request": "launch",
+      "console": "integratedTerminal",
+      "justMyCode": false,
+      "module": "pytest",
+      "args": [
+        "--maxfail=1",
+        "--disable-warnings",
+        "${file}"
+      ]
+    },
+    {
+      "name": "🐍 Debug Single Test (by name)",
+      "type": "python",
+      "request": "launch",
+      "console": "integratedTerminal",
+      "justMyCode": false,
+      "module": "pytest",
+      "args": [
+        "--maxfail=1",
+        "--disable-warnings",
+        "${file}::${input:testFunction}"
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "id": "testFunction",
+      "type": "promptString",
+      "description": "Enter the specific test function name (e.g. test_story_agent_replaces_placeholder_and_returns_story)"
+    }
+  ]
+}

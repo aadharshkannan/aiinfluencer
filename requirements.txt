@@ -1,0 +1,13 @@
+langchain
+langgraph
+openai
+anthropic
+google-cloud-texttospeech
+boto3
+elevenlabs
+moviepy
+ffmpeg-python
+pydub
+requests
+python-dotenv
+pytest
