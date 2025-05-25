@@ -31,6 +31,15 @@ pip install -r requirements.txt
 ---
 Fantastic project, Aadharsh. You're essentially assembling a Hollywood production line, but the stars are LLM agents, and they don't ask for trailers or green M\&Ms. Below is a solid, scalable folder structure and a `README.md` template tailored for your project: **`aiinfluencer`**.
 
+```
+.
+├── agents/            # AI agents
+├── db/                # SQLAlchemy models and Pydantic schemas
+│   ├── models.py
+│   └── schemas.py
+└── ...
+```
+
 ---
 
 ## 🧪 Run the Pipeline
@@ -53,6 +62,8 @@ pytest tests/
 * **GPT-4o** – Story and screenplay generation
 * **Synthesia** – Visual synthesis
 * **YouTube Data API** – Publishing
+* **PostgreSQL** – Persistent storage for generated video metadata
+* **SQLAlchemy & Alembic** – ORM and database migrations
 
 ---
 
@@ -61,6 +72,30 @@ pytest tests/
 * Cloud compute for media rendering (Synthesia)
 * Local storage for media assets (move to cloud in the future)
 * LangSmith for agent observability and logging
+
+---
+
+## 🗄️ Database
+
+Run a local PostgreSQL instance using Docker:
+
+```bash
+docker compose up -d db
+```
+
+Run migrations:
+
+```bash
+./scripts/upgrade.sh
+```
+
+Downgrade (revert last migration):
+
+```bash
+./scripts/downgrade.sh
+```
+
+The database URL is configured via the `DATABASE_URL` environment variable.
 
 ---
 
