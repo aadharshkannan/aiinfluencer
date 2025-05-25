@@ -5,4 +5,4 @@
 Refine it for a narration style YouTube Shorts video.
 Always end the narration with 
 "The moral of the story is: {proverb}.
-If you like such fun stories, subscribe to Proverb Pandu."
+If you like such fun stories, subscribe to Proverb Panda."
