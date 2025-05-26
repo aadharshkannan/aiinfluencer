@@ -52,6 +52,7 @@ pluggy
 proglog
 proto-plus
 protobuf
+psycopg2
 pyasn1
 pyasn1_modules
 pydantic
