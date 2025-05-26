@@ -4,7 +4,13 @@ import requests
 from pydantic import ValidationError
 from unittest.mock import patch, MagicMock
 
-from utils import SynthesiaClient, CreateVideoRequest, CreateVideoInput
+from utils import (
+    SynthesiaClient,
+    CreateVideoRequest,
+    CreateVideoInput,
+    TemplateData,
+    CreateVideoFromTemplateRequest,
+)
 
 
 def test_create_video_request_valid():
@@ -118,3 +124,66 @@ def test_synthesia_client_create_video_http_error(mock_post):
     # Act & Assert
     with pytest.raises(requests.exceptions.HTTPError):
         client.create_video(params)
+
+
+def test_create_video_from_template_request_valid():
+    data = TemplateData(screenplay="Hello")
+    req = CreateVideoFromTemplateRequest(
+        test=True,
+        templateData=data,
+        visibility="private",
+        templateId="tmpl-1",
+        title="T",
+        description="D",
+    )
+
+    payload = req.model_dump(by_alias=True)
+    assert payload["templateId"] == "tmpl-1"
+    assert payload["templateData"]["screenplay"] == "Hello"
+
+
+@patch("utils.requests.post")
+def test_synthesia_client_create_video_from_template_success(mock_post):
+    mock_resp = MagicMock()
+    mock_resp.status_code = 201
+    mock_resp.json.return_value = {"id": "vid_temp"}
+    mock_resp.raise_for_status.return_value = None
+    mock_post.return_value = mock_resp
+
+    client = SynthesiaClient(api_key="fakekey")
+    req = CreateVideoFromTemplateRequest(
+        test=True,
+        templateData=TemplateData(screenplay="Hi"),
+        visibility="private",
+        templateId="templ",
+        title="T",
+        description="D",
+    )
+
+    result = client.create_video_from_template(req)
+    mock_post.assert_called_once_with(
+        "https://api.synthesia.io/v2/videos",
+        headers=client.headers,
+        json=req.model_dump(by_alias=True),
+    )
+    assert result == {"id": "vid_temp"}
+
+
+@patch("utils.requests.post")
+def test_synthesia_client_create_video_from_template_http_error(mock_post):
+    mock_resp = MagicMock()
+    mock_resp.raise_for_status.side_effect = requests.exceptions.HTTPError("Bad")
+    mock_post.return_value = mock_resp
+
+    client = SynthesiaClient(api_key="fakekey")
+    req = CreateVideoFromTemplateRequest(
+        test=False,
+        templateData=TemplateData(screenplay="Oops"),
+        visibility="private",
+        templateId="t",
+        title="T",
+        description="D",
+    )
+
+    with pytest.raises(requests.exceptions.HTTPError):
+        client.create_video_from_template(req)

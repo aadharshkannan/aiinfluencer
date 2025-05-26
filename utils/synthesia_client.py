@@ -1,7 +1,10 @@
 import os
 import requests
 from typing import Any
-from .synthesia_models import CreateVideoRequest
+from .synthesia_models import (
+    CreateVideoRequest,
+    CreateVideoFromTemplateRequest,
+)
 
 class SynthesiaClient:
     """
@@ -33,6 +36,18 @@ class SynthesiaClient:
         url = f"{self.base_url}/videos"
         payload = request.model_dump(by_alias=True)
         
+        resp = requests.post(url, headers=self.headers, json=payload)
+        resp.raise_for_status()
+        return resp.json()
+
+    def create_video_from_template(
+        self, request: CreateVideoFromTemplateRequest
+    ) -> Any:
+        """Create a Synthesia video based on an existing template."""
+
+        url = f"{self.base_url}/videos"
+        payload = request.model_dump(by_alias=True)
+
         resp = requests.post(url, headers=self.headers, json=payload)
         resp.raise_for_status()
         return resp.json()

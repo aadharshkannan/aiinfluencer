@@ -5,7 +5,13 @@ import random
 from langchain_openai import ChatOpenAI
 from agents.story_agent import StoryAgent
 from agents.screenplay_agent import ScreenplayAgent
-from utils import SynthesiaClient, CreateVideoRequest, CreateVideoInput
+from utils import (
+    SynthesiaClient,
+    CreateVideoRequest,
+    CreateVideoInput,
+    TemplateData,
+    CreateVideoFromTemplateRequest,
+)
 from sqlalchemy.orm import Session
 from db import store_video_metadata
 
@@ -78,5 +84,33 @@ class AgentOrchestrator:
         )
 
         response = self.synthesia_client.create_video(payload)
+        store_video_metadata(session, proverb, story, screenplay, response)
+        return response
+
+    def generate_video_from_template(
+        self,
+        screenplay: str,
+        title: str,
+        description: str,
+        proverb: str,
+        story: str,
+        template_id: str,
+        session: Session,
+        visibility: str = "private",
+        test: bool = True,
+    ) -> dict:
+        """Create a Synthesia video using a template and store metadata."""
+
+        data = TemplateData(screenplay=screenplay)
+        payload = CreateVideoFromTemplateRequest(
+            test=test,
+            templateData=data,
+            visibility=visibility,
+            templateId=template_id,
+            title=title,
+            description=description,
+        )
+
+        response = self.synthesia_client.create_video_from_template(payload)
         store_video_metadata(session, proverb, story, screenplay, response)
         return response
