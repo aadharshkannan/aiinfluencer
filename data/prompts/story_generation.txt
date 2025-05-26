@@ -1,7 +1,7 @@
 
-### 🔧 **Prompt: "Pixar-ify This Proverb"**
+### 🔧 **Prompt: "Pixar-ify This Proverb / Moral"**
 
-> **Take the following proverb**: *"{proverb}"*
+> **Take the following proverb or moral**: *"{proverb}"*
 >
 > Write a **compelling short story** (300–600 words) that follows the **Pixar storytelling formula**, where:
 >

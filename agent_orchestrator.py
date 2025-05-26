@@ -61,11 +61,10 @@ class AgentOrchestrator:
             "santa_costume1_cameraA",
         ]
         background_options = [
-            "luxury_lobby",
-            "synthesia.f6898dc2-36a1-4913-94ed-f0cdd7f553d2",
-            "synthesia.2d6c9bf2-896b-4194-8164-3a5c217a6f56",
-            "synthesia.35a9ab38-5294-4ee2-a0c6-456ad4372b03",
-            "synthesia.b5b11f20-9461-45f2-b647-5bc4e3d52f94",
+            "workspace-media.189b337f-7b34-497b-a030-9f87815bbc6f",
+            "workspace-media.e11ba7cb-55ad-4baf-8326-8c2e79a2f760",
+            "workspace-media.0ee3a9b3-b3c0-4936-8969-8798e731e420",
+            "workspace-media.7bbb37f2-090f-4e1c-bb25-78355e2c6cb9"
         ]
 
         avatar_id = random.choice(avatar_options)
