@@ -15,7 +15,7 @@ def test_create_video_request_valid():
         background="green_screen"
     )
     # Check alias mapping in serialized dict
-    data = params.dict(by_alias=True)
+    data = params.model_dump(by_alias=True)
     assert data["scriptText"] == "Hello!"
     assert data["title"] == "Demo"
 
@@ -52,7 +52,7 @@ def test_synthesia_client_create_video_success(mock_post):
     mock_post.assert_called_once_with(
         "https://api.synthesia.io/v2/videos",
         headers=client.headers,
-        json=params.dict(by_alias=True),
+        json=params.model_dump(by_alias=True),
     )
     assert result == {"id": "vid_123"}
 

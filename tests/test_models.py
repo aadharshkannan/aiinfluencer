@@ -19,7 +19,7 @@ def test_video_model_roundtrip():
     assert retrieved is not None
     assert retrieved.proverb == "test"
 
-    schema_obj = schemas.Video.from_orm(retrieved)
+    schema_obj = schemas.Video.model_validate(retrieved)
     assert schema_obj.id == retrieved.id
     assert schema_obj.status == "done"
 
