@@ -17,7 +17,7 @@ class CreateVideoInput(BaseModel):
 class CreateVideoRequest(BaseModel):
     test: bool = Field(..., description="Flag to mark test video creation")
     title: str = Field(..., min_length=1, description="Title of the video")
-    aspectRatio: str = Field(...,description="Aspect Ratio (e.g., 9:16)")
+    aspectRatio: str = Field(...,description="Aspect Ratio (e.g., 16:9)")
     description: str = Field(...,description="Description of the Video")
     input: List[CreateVideoInput] = Field(...,description="Scenes that are input from video")
 

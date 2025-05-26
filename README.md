@@ -90,13 +90,12 @@ Run migrations:
 ```
 
 Downgrade (revert last migration):
-Log into the docker container and 
 
 ```bash
 ./scripts/downgrade.sh
 ```
 
-The database URL is configured via the `DATABASE_URL` environment variable.
+The database URL is configured in the Alembic.ini File.
 
 ---
 

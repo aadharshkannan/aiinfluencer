@@ -47,18 +47,15 @@ class AgentOrchestrator:
         proverb: str,
         story: str,
         session: Session,
-        aspect_ratio: str = "9:16",
+        aspect_ratio: str,
         test: bool = True,
     ) -> dict:
         """Create a Synthesia video from the given screenplay text and store metadata."""
 
         avatar_options = [
-            "anna_costume1_cameraA",
-            "440548a8-4701-402f-afdb-6d32a851a3a6",
-            "5e95491a-8101-44a7-a8cf-96f083e699ae",
-            "c107b417-6957-4675-b021-905c2843c3a8",
-            "a1b370c6-8f8f-4b26-bd29-e276b25ddd44",
-            "santa_costume1_cameraA",
+            "af145939-708c-4855-8451-b7fc0810b0a5",
+            "c9a26b8f-205b-4993-b059-85c68b4cdd48",
+            "af145939-708c-4855-8451-b7fc0810b0a5",
         ]
         background_options = [
             "workspace-media.189b337f-7b34-497b-a030-9f87815bbc6f",

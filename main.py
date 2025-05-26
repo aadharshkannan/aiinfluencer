@@ -1,11 +1,9 @@
-from agent_orchestrator import AgentOrchestrator
-import argparse
 from dotenv import load_dotenv
-
-from db import SessionLocal
-
 load_dotenv()
 
+from agent_orchestrator import AgentOrchestrator
+import argparse
+from db import SessionLocal
 
 def main():
     parser = argparse.ArgumentParser(
@@ -35,6 +33,7 @@ def main():
             proverb=args.moral,
             story=story["story"],
             session=session,
+            aspect_ratio="16:9",
         )
     finally:
         session.close()

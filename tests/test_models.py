@@ -11,7 +11,11 @@ def test_video_model_roundtrip():
 
     session = TestingSession()
 
-    video = models.Video(proverb="test", story="s", screenplay="sc", status="done")
+    video = models.Video(id="rtt-id",
+                         proverb="test",
+                         story="s",
+                         screenplay="sc",
+                         status="done")
     session.add(video)
     session.commit()
 

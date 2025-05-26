@@ -46,6 +46,7 @@ def store_video_metadata(
     synthesia_id = video_response.get("id")
 
     video = Video(
+        id = synthesia_id,
         proverb=proverb,
         story=story,
         screenplay=screenplay,

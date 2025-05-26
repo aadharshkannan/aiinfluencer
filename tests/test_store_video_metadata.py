@@ -23,6 +23,7 @@ def test_store_video_metadata_inserts_row():
 
     saved = session.query(models.Video).first()
     assert saved is not None
+    assert saved.id == "uuid-123"
     assert saved.proverb == "prov"
     assert saved.story == "story"
     assert saved.screenplay == "screenplay"

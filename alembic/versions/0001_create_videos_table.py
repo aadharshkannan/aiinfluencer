@@ -17,7 +17,7 @@ depends_on = None
 def upgrade() -> None:
     op.create_table(
         'videos',
-        sa.Column('id', sa.Integer(), primary_key=True),
+        sa.Column('id', sa.String(), primary_key=True),
         sa.Column('proverb', sa.String(), nullable=False),
         sa.Column('story', sa.Text(), nullable=True),
         sa.Column('screenplay', sa.Text(), nullable=True),

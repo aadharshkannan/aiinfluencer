@@ -12,7 +12,7 @@ class Video(Base):
 
     __tablename__ = "videos"
 
-    id: Mapped[int] = mapped_column(primary_key=True)
+    id: Mapped[str] = mapped_column(String, primary_key=True)
     proverb: Mapped[str] = mapped_column(String, nullable=False)
     story: Mapped[str | None] = mapped_column(Text, nullable=True)
     screenplay: Mapped[str | None] = mapped_column(Text, nullable=True)
