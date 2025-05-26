@@ -47,5 +47,13 @@ def main():
                                                   proverb=args.moral)
     print(screenplay)
 
+    video_request = orchestrator.generate_video(
+        screenplay['screenplay'],
+        args.moral.replace(' ','_'),
+        args.moral        
+    )
+
+    print(video_request)
+
 if __name__ == "__main__":
     main()

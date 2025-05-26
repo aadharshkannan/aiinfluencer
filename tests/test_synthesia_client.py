@@ -12,7 +12,9 @@ def test_create_video_request_valid():
         title="Demo",
         script_text="Hello!",
         avatar="anna_costume1_cameraA",
-        background="green_screen"
+        background="green_screen",
+        description="Some description",
+        aspectRatio="9:16"
     )
     # Check alias mapping in serialized dict
     data = params.model_dump(by_alias=True)
@@ -26,7 +28,9 @@ def test_create_video_request_missing_fields():
             test=False,
             script_text="Hi",
             avatar="anna",
-            background="bg"
+            background="bg",
+            description="Desc",
+            aspectRatio="16:9"
         )
 
 @patch("utils.requests.post")
@@ -44,7 +48,9 @@ def test_synthesia_client_create_video_success(mock_post):
         title="TestVid",
         script_text="Script",
         avatar="avatar1",
-        background="bg1"
+        background="bg1",
+        description="Desc",
+        aspectRatio="16:9"
     )
     result = client.create_video(params)
 
@@ -69,7 +75,9 @@ def test_synthesia_client_create_video_http_error(mock_post):
         title="ErrVid",
         script_text="Err",
         avatar="avatar",
-        background="bg"
+        background="bg",
+        description="Desc",
+        aspectRatio="16:9"
     )
     with pytest.raises(requests.exceptions.HTTPError):
         client.create_video(params)

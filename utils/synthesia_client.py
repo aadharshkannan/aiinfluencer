@@ -16,8 +16,24 @@ class SynthesiaClient:
         Raises HTTPError on bad status codes.
         """
         url = f"{self.base_url}/videos"
-        payload = params.model_dump(by_alias=True)
+
+        # build the payload to match the sample structure
+        payload = {
+            "test": params.test,
+            "title": params.title,
+            "visibility": getattr(params, "visibility", "private"),
+            "aspectRatio": getattr(params, "aspect_ratio", "9:16"),
+            "input": [
+                {
+                    "scriptText": params.script_text,
+                    "avatar": params.avatar,
+                    "avatarSettings": getattr(params, "avatar_settings", {}),
+                    "background": params.background,
+                    "backgroundSettings": getattr(params, "background_settings", {}),
+                }
+            ]
+        }
+
         response = requests.post(url, headers=self.headers, json=payload)
-        # Will raise requests.exceptions.HTTPError for 4xx/5xx responses
         response.raise_for_status()
         return response.json()
