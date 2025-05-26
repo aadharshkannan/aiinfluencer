@@ -45,7 +45,7 @@ class SynthesiaClient:
     ) -> Any:
         """Create a Synthesia video based on an existing template."""
 
-        url = f"{self.base_url}/videos"
+        url = f"{self.base_url}/videos/fromTemplate"
         payload = request.model_dump(by_alias=True)
 
         resp = requests.post(url, headers=self.headers, json=payload)

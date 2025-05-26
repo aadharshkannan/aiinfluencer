@@ -94,12 +94,19 @@ class AgentOrchestrator:
         description: str,
         proverb: str,
         story: str,
-        template_id: str,
         session: Session,
         visibility: str = "private",
         test: bool = True,
     ) -> dict:
         """Create a Synthesia video using a template and store metadata."""
+
+        template_options = [
+            "f3fcb06b-416c-48aa-98f8-f32dd9573cdd",
+            "a7a6602a-c2e3-464c-a06f-32a586ba1328",
+            "cecb9b14-50f5-4db9-803d-6e7c509c1a42"
+        ]
+
+        template_id = random.choice(template_options)
 
         data = TemplateData(screenplay=screenplay)
         payload = CreateVideoFromTemplateRequest(

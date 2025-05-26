@@ -26,14 +26,13 @@ def main():
 
     session = SessionLocal()
     try:
-        video_request = orchestrator.generate_video(
+        video_request = orchestrator.generate_video_from_template(
             screenplay=screenplay["screenplay"],
             title=args.moral.replace(" ", "_"),
             description=args.moral,
             proverb=args.moral,
             story=story["story"],
-            session=session,
-            aspect_ratio="16:9",
+            session=session
         )
     finally:
         session.close()

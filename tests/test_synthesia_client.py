@@ -162,7 +162,7 @@ def test_synthesia_client_create_video_from_template_success(mock_post):
 
     result = client.create_video_from_template(req)
     mock_post.assert_called_once_with(
-        "https://api.synthesia.io/v2/videos",
+        "https://api.synthesia.io/v2/videos/fromTemplate",
         headers=client.headers,
         json=req.model_dump(by_alias=True),
     )
