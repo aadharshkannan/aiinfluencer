@@ -1,3 +1,4 @@
+alembic
 annotated-types
 anthropic
 anyio
@@ -52,7 +53,7 @@ pluggy
 proglog
 proto-plus
 protobuf
-psycopg2
+psycopg2-binary
 pyasn1
 pyasn1_modules
 pydantic

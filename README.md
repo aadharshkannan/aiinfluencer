@@ -90,6 +90,7 @@ Run migrations:
 ```
 
 Downgrade (revert last migration):
+Log into the docker container and 
 
 ```bash
 ./scripts/downgrade.sh
