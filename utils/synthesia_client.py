@@ -1,39 +1,38 @@
+import os
 import requests
 from typing import Any
 from .synthesia_models import CreateVideoRequest
 
 class SynthesiaClient:
-    def __init__(self, api_key: str, base_url: str = "https://api.synthesia.io/v2"):
-        self.base_url = base_url
+    """
+    Minimal Synthesia API client.
+    Relies on Pydantic's CreateVideoRequest to produce a valid payload.
+    """
+
+    def __init__(self, api_key: str = None, base_url: str = "https://api.synthesia.io/v2"):
+        # Allow override or auto-pickup from env
+        self.api_key = api_key or os.environ.get("SYNTHESIA_API_KEY")
+        if not self.api_key:
+            raise RuntimeError("SYNTHESIA_API_KEY must be set in env or passed explicitly")
+        
+        self.base_url = base_url.rstrip("/")
         self.headers = {
-            "Authorization": f"Bearer {api_key}",
-            "Content-Type": "application/json",
+            "Authorization": f"{self.api_key}",
+            "accept": "application/json",
+            "content-type": "application/json",
         }
 
-    def create_video(self, params: CreateVideoRequest) -> Any:
+    def create_video(self, request: CreateVideoRequest) -> Any:
         """
-        Create a video in Synthesia by posting the given parameters.
-        Raises HTTPError on bad status codes.
+        Create a Synthesia video from a fully-validated CreateVideoRequest.
+        
+        :param request: Pydantic model capturing test, title, aspectRatio, description & input scenes.
+        :return: Parsed JSON response from Synthesia.
+        :raises: requests.HTTPError on bad status codes.
         """
         url = f"{self.base_url}/videos"
-
-        # build the payload to match the sample structure
-        payload = {
-            "test": params.test,
-            "title": params.title,
-            "visibility": getattr(params, "visibility", "private"),
-            "aspectRatio": getattr(params, "aspect_ratio", "9:16"),
-            "input": [
-                {
-                    "scriptText": params.script_text,
-                    "avatar": params.avatar,
-                    "avatarSettings": getattr(params, "avatar_settings", {}),
-                    "background": params.background,
-                    "backgroundSettings": getattr(params, "background_settings", {}),
-                }
-            ]
-        }
-
-        response = requests.post(url, headers=self.headers, json=payload)
-        response.raise_for_status()
-        return response.json()
+        payload = request.model_dump(by_alias=True)
+        
+        resp = requests.post(url, headers=self.headers, json=payload)
+        resp.raise_for_status()
+        return resp.json()

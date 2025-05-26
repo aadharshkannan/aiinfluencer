@@ -46,7 +46,6 @@ def main():
     screenplay = orchestrator.generate_screenplay(story=story['story'],
                                                   proverb=args.moral)
     print(screenplay)
-
     video_request = orchestrator.generate_video(
         screenplay['screenplay'],
         args.moral.replace(' ','_'),
