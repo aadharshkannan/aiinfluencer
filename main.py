@@ -32,7 +32,8 @@ def main():
             description=args.moral,
             proverb=args.moral,
             story=story["story"],
-            session=session
+            session=session,
+            test=False
         )
     finally:
         session.close()
