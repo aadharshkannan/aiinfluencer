@@ -55,6 +55,7 @@ class StoryAgent:
         """Critique the story and decide if it needs revision."""
         prompt = self.critique_template.replace("{story}", state["story"])
         resp = self.llm.invoke([SystemMessage(content=prompt)])
+        print(f"Critique:{resp.content}")
         return {**state, "critique_comments": resp.content}
 
     def _should_revise(self, state: StoryState) -> str:

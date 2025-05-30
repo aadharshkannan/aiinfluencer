@@ -32,8 +32,18 @@ def main():
         default="data/prompts",
         help="Directory where prompt templates are stored.",
     )
+    parser.add_argument(
+        "-istest",
+        "--istest",
+        action="store_true",
+        default=False,
+        help="Run the video generation in test mode with watermark"
+    )
 
     args = parser.parse_args()
+
+    if args.istest:
+        print("#### Running in test mode ####")
 
     orchestrator = AgentOrchestrator(
         model_name=args.model,
@@ -51,7 +61,7 @@ def main():
     print(screenplay)
 
     session = SessionLocal()
-    try:
+    try:        
         video_request = orchestrator.generate_video_from_template(
             screenplay=screenplay["screenplay"],
             title=args.moral.replace(" ", "_"),
@@ -59,7 +69,7 @@ def main():
             proverb=args.moral,
             story=story["story"],
             session=session,
-            test=False,
+            test=args.istest,
         )
     finally:
         session.close()

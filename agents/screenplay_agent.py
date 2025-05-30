@@ -59,6 +59,7 @@ class ScreenplayAgent:
         """Critique the screenplay and decide if it needs revision."""
         prompt = self.critique_template.replace("{screenplay}", state["screenplay"])
         resp = self.llm.invoke([SystemMessage(content=prompt)])
+        print(f"Critique:{resp.content}")
         return {**state, "critique_comments": resp.content}
 
     def _should_revise(self, state: ScreenplayState) -> str:
