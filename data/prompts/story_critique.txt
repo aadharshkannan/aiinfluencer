@@ -1,0 +1,2 @@
+Return 'accept' if the story is good. Otherwise provide feedback on how to improve it.
+Story: {story}
