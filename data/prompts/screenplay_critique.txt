@@ -1,0 +1,2 @@
+Return 'accept' if the screenplay works. Otherwise provide notes for improvement.
+Screenplay: {screenplay}

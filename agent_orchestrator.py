@@ -19,21 +19,48 @@ from db import store_video_metadata
 class AgentOrchestrator:
     """Orchestrator for the aiinfluencer pipeline."""
 
-    def __init__(self, model_name: str = "gpt-4o", temperature: float = 0.0, prompts_dir: str = "data/prompts"):
+    def __init__(
+        self,
+        model_name: str = "gpt-4o",
+        temperature: float = 0.0,
+        prompts_dir: str = "data/prompts",
+    ):
         """Initialize the orchestrator and its agents."""
         self.llm = ChatOpenAI(model_name=model_name, temperature=temperature)
         self.prompts_dir = prompts_dir
 
         story_template_path = os.path.join(self.prompts_dir, "story_generation.txt")
-        screenplay_template_path = os.path.join(self.prompts_dir, "screenplay_generation.txt")
+        screenplay_template_path = os.path.join(
+            self.prompts_dir, "screenplay_generation.txt"
+        )
+        story_critique_path = os.path.join(self.prompts_dir, "story_critique.txt")
+        screenplay_critique_path = os.path.join(
+            self.prompts_dir, "screenplay_critique.txt"
+        )
 
         if not os.path.exists(story_template_path):
             raise FileNotFoundError(f"Prompt template not found: {story_template_path}")
         if not os.path.exists(screenplay_template_path):
-            raise FileNotFoundError(f"Prompt template not found: {screenplay_template_path}")
+            raise FileNotFoundError(
+                f"Prompt template not found: {screenplay_template_path}"
+            )
+        if not os.path.exists(story_critique_path):
+            raise FileNotFoundError(f"Prompt template not found: {story_critique_path}")
+        if not os.path.exists(screenplay_critique_path):
+            raise FileNotFoundError(
+                f"Prompt template not found: {screenplay_critique_path}"
+            )
 
-        self.story_agent = StoryAgent(llm=self.llm, prompt_file=story_template_path)
-        self.screenplay_agent = ScreenplayAgent(llm=self.llm, prompt_file=screenplay_template_path)
+        self.story_agent = StoryAgent(
+            llm=self.llm,
+            prompt_file=story_template_path,
+            critique_prompt_file=story_critique_path,
+        )
+        self.screenplay_agent = ScreenplayAgent(
+            llm=self.llm,
+            prompt_file=screenplay_template_path,
+            critique_prompt_file=screenplay_critique_path,
+        )
         self.synthesia_client = SynthesiaClient(api_key=None)
         self.logger = logging.getLogger(__name__)
 
@@ -67,13 +94,15 @@ class AgentOrchestrator:
             "workspace-media.189b337f-7b34-497b-a030-9f87815bbc6f",
             "workspace-media.e11ba7cb-55ad-4baf-8326-8c2e79a2f760",
             "workspace-media.0ee3a9b3-b3c0-4936-8969-8798e731e420",
-            "workspace-media.7bbb37f2-090f-4e1c-bb25-78355e2c6cb9"
+            "workspace-media.7bbb37f2-090f-4e1c-bb25-78355e2c6cb9",
         ]
 
         avatar_id = random.choice(avatar_options)
         background_id = random.choice(background_options)
 
-        scene = CreateVideoInput(scriptText=screenplay, avatar=avatar_id, background=background_id)
+        scene = CreateVideoInput(
+            scriptText=screenplay, avatar=avatar_id, background=background_id
+        )
 
         payload = CreateVideoRequest(
             test=test,
@@ -103,7 +132,7 @@ class AgentOrchestrator:
         template_options = [
             "f3fcb06b-416c-48aa-98f8-f32dd9573cdd",
             "a7a6602a-c2e3-464c-a06f-32a586ba1328",
-            "cecb9b14-50f5-4db9-803d-6e7c509c1a42"
+            "cecb9b14-50f5-4db9-803d-6e7c509c1a42",
         ]
 
         template_id = random.choice(template_options)
