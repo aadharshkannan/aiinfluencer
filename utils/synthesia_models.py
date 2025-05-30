@@ -58,3 +58,10 @@ class CreateVideoFromTemplateRequest(BaseModel):
         populate_by_name=True,
     )
 
+class VideoStatus(BaseModel):
+    """Simplified representation of a Synthesia video status."""
+
+    id: str
+    status: str
+
+    model_config = ConfigDict(extra="ignore", populate_by_name=True)

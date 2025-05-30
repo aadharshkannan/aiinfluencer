@@ -4,6 +4,7 @@ from typing import Any
 from .synthesia_models import (
     CreateVideoRequest,
     CreateVideoFromTemplateRequest,
+    VideoStatus,
 )
 
 class SynthesiaClient:
@@ -51,3 +52,12 @@ class SynthesiaClient:
         resp = requests.post(url, headers=self.headers, json=payload)
         resp.raise_for_status()
         return resp.json()
+    
+    def get_video_status(self, video_id: str) -> VideoStatus:
+        """Retrieve status information for a Synthesia video."""
+
+        url = f"{self.base_url}/videos/{video_id}"
+        
+        resp = requests.get(url, headers=self.headers)
+        resp.raise_for_status()
+        return VideoStatus.model_validate(resp.json())

@@ -3,6 +3,7 @@ from .synthesia_models import (
     CreateVideoInput,
     TemplateData,
     CreateVideoFromTemplateRequest,
+    VideoStatus,
 )
 from .synthesia_client import SynthesiaClient
 import requests
@@ -13,5 +14,6 @@ __all__ = [
     'CreateVideoInput',
     'TemplateData',
     'CreateVideoFromTemplateRequest',
+    'VideoStatus',
     'requests',
 ]

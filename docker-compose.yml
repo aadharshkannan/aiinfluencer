@@ -1,7 +1,9 @@
 version: '3.8'
 services:
   db:
-    build: ./docker/db
+    build:
+      context: .
+      dockerfile: Dockerfile.db
     ports:
       - "5432:5432"
     environment:
@@ -10,5 +12,16 @@ services:
       POSTGRES_DB: aiinfluencer
     volumes:
       - postgres-data:/var/lib/postgresql/data
+ 
+  video-status-job:
+    build:
+      context: .
+      dockerfile: Dockerfile.job
+    environment:
+      - DATABASE_URL=postgresql://ai:ai@db:5432/aiinfluencer
+      - SYNTHESIA_API_KEY=${SYNTHESIA_API_KEY}
+      - VIDEO_STATUS_CHECK_INTERVAL=${VIDEO_STATUS_CHECK_INTERVAL}
+    depends_on:
+      - db
 volumes:
   postgres-data:
